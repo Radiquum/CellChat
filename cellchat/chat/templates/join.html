@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>CellChat - join</title>
+{% endblock %}
+{% block content %}
+{% if error is not None %}
+    <p>{{error}}</p>
+{% endif %}
+    <form action="{% url 'join' %}" method="post">
+        {% csrf_token %}
+        <label for="room_id">Комната: </label>
+        <input id="room_id" type="text" name="room_id" value="">
+        <br>
+        <label for="username">Имя: </label>
+        <input id="username" type="text" name="username" value="">
+        <br>
+        <input type="submit" value="Подключиться">
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>{{username}}@{{room_id}}</title>
+{% endblock %}
+{% block content %}
+        
+    <form action="{% url 'room' room_id messages %}" method="post">
+        {% csrf_token %}
+        <label for="message">Написать сообщение в {{room_id}}: </label>
+        <input id="message" type="text" name="message" value="">
+        <input type="submit" value="send">
+    </form>
+
+    <a href="{% url 'index' %}">Главная</a>
+    <a href="{% url 'room' room_id messages %}">Обновить...</a>
+
+    {% if latest_message_list %}
+
+            {% for message in latest_message_list %}
+                    <p><span style="color:blue">@{{ message.sender }}: </span>{{ message.message_text }}</p>
+            {% endfor %}
+        
+    {% else %}
+
+        <p>Напиши первое сообщение!</p>
+        
+    {% endif %}
+
+    {% if messages_all > messages %}
+        <a href="{% url 'room' room_id messages|add:'5' %}">Загрузить предыдущие сообщения...</a>
+    {% endif %}
+
+{% endblock %}

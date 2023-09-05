@@ -1,0 +1,24 @@
+version: "3.9"
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.70.0.0/24
+          gateway: 172.70.0.1
+
+services:
+# Tunnel access from Internet
+  cloudflare_cellchat:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflare_cellchat
+    restart: always
+    command: tunnel --no-autoupdate run --token 
+    
+  cellchat:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: cellchat
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./db.sqlite3:/chat/db.sqlite3 

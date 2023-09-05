@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>CellChat - create</title>
+{% endblock %}
+{% block content %}
+{% if error is not None %}
+    <p>{{error}}</p>
+{% endif %}
+    <form action="{% url 'create' %}" method="post">
+        {% csrf_token %}
+        <label for="room_id">Комната: </label>
+        <input id="room_id" type="text" name="room_id" value="">
+        <br>
+        <label for="username">Имя: </label>
+        <input id="username" type="text" name="username" value="">
+        <br>
+        <label for="password">Пароль*:</label>
+        <input id="password" type="text" name="password" value="">
+        <br>
+        <input type="submit" value="Создать">
+    </form>
+<p> * - Необязательно</p>
+{% endblock %}
