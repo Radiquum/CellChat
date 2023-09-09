@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block head %}
-    <title>{{username}}@{{room_id}}</title>
+    <title>{{username}}@{{room_name}}</title>
 {% endblock %}
 {% block content %}
         
     <form action="{% url 'room' room_id messages %}" method="post">
         {% csrf_token %}
-        <label for="message">Написать сообщение в {{room_id}}: </label>
+        <label for="message">Написать сообщение в "{{room_name}}": </label>
         <input id="message" type="text" name="message" value="">
-        <input type="submit" value="send">
+        <input type="submit" value="Отправить">
     </form>
 
     <a href="{% url 'index' %}">Главная</a>

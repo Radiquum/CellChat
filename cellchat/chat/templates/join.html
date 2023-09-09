@@ -8,8 +8,8 @@
 {% endif %}
     <form action="{% url 'join' %}" method="post">
         {% csrf_token %}
-        <label for="room_id">Комната: </label>
-        <input id="room_id" type="text" name="room_id" value="">
+        <label for="room_name">Комната: </label>
+        <input id="room_name" type="text" name="room_name" value="">
         <br>
         <label for="username">Имя: </label>
         <input id="username" type="text" name="username" value="">
